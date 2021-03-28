@@ -11,7 +11,7 @@ class Baluva:
         self.screen = pygame.display.set_mode((1200, 800))
         pygame.display.set_caption("Baluva")
         
-        # Set the background color.
+        # Set the background color to a sandy color.
         self.bg_color = (194, 178, 128)
         
     def run_game(self):
