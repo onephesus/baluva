@@ -1,8 +1,10 @@
 import sys
 import pygame
+from pygame.locals import *
 
 from settings import Settings
 from ninja import Ninja
+from tileset import Tileset
 
 class Baluva:
     """Overall class to manage game assets and behavior."""
@@ -13,10 +15,11 @@ class Baluva:
         self.settings = Settings()
         
         self.screen = pygame.display.set_mode(
-            (self.settings.screen_width, self.settings.screen_height))
+            (self.settings.screen_width, self.settings.screen_height), RESIZABLE)
         pygame.display.set_caption("Baluva")
         
         self.ninja = Ninja(self)
+        self.tileset = Tileset(self)
     
         
     def run_game(self):
@@ -31,12 +34,16 @@ class Baluva:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RIGHT:
+                    # Move the ninja to the right.
+                    self.ninja.rect.x += 1
             
             
     def _update_screen(self):
         """Update images on the screen, and flip to the new screen."""
         # Redraw the screeen during each pass through the loop.
-        self.screen.fill(self.settings.bg_color)
+        self.tileset.blitme()
         self.ninja.blitme()
             
         # Make the most recently drawn screen visible.
