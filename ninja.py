@@ -1,4 +1,5 @@
 import pygame
+from tileset import Tileset
 
 class Ninja:
     """A class to manage the ninja."""
@@ -7,7 +8,9 @@ class Ninja:
         """Initialize the ninja and set its starting position."""
         self.screen = b_game.screen
         self.settings = b_game.settings
-        self.screen_rect = b_game.screen.get_rect()
+        
+        self.tileset = Tileset(self)
+        self.screen_rect = self.tileset.screen_rect
         
         # Load the ninja image and get its rect.
         self.image = pygame.image.load('images/Idle__000.png')
@@ -26,7 +29,7 @@ class Ninja:
     def update(self):
         """Update the ninja's position based on the movement flag."""
         # Update the ninja's y value, not the rect
-        if self.moving_up:
+        if self.moving_up and self.rect.top < self.screen_rect.top:
             self.y -= self.settings.ninja_speed
             self.image = pygame.image.load('images/Jump__006.png')
         elif self.moving_down:
