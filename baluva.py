@@ -26,6 +26,7 @@ class Baluva:
         """Start the main loop for the game."""
         while True:
             self._check_events()
+            self.ninja.update()
             self._update_screen()
             
             
@@ -35,9 +36,16 @@ class Baluva:
             if event.type == pygame.QUIT:
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RIGHT:
-                    # Move the ninja to the right.
-                    self.ninja.rect.x += 1
+                if event.key == pygame.K_UP:
+                    self.ninja.moving_up = True
+                elif event.key == pygame.K_DOWN:
+                    self.ninja.moving_down = True
+                
+            elif event.type == pygame.KEYUP:
+                if event.key == pygame.K_UP:
+                    self.ninja.moving_up = False
+                elif event.key == pygame.K_DOWN:
+                    self.ninja.moving_down = False
             
             
     def _update_screen(self):
