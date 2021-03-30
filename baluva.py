@@ -4,7 +4,6 @@ from pygame.locals import *
 
 from settings import Settings
 from ninja import Ninja
-from tileset import Tileset
 
 class Baluva:
     """Overall class to manage game assets and behavior."""
@@ -19,7 +18,6 @@ class Baluva:
         pygame.display.set_caption("Baluva")
         
         self.ninja = Ninja(self)
-        self.tileset = Tileset(self)
     
         
     def run_game(self):
@@ -51,7 +49,7 @@ class Baluva:
     def _update_screen(self):
         """Update images on the screen, and flip to the new screen."""
         # Redraw the screeen during each pass through the loop.
-        self.tileset.blitme()
+        self.screen.fill(self.settings.bg_color)
         self.ninja.blitme()
             
         # Make the most recently drawn screen visible.
