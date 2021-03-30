@@ -1,6 +1,5 @@
 import sys
 import pygame
-from pygame.locals import *
 
 from settings import Settings
 from ninja import Ninja
@@ -14,7 +13,8 @@ class Baluva:
         self.settings = Settings()
         
         self.screen = pygame.display.set_mode(
-            (self.settings.screen_width, self.settings.screen_height), RESIZABLE)
+            (self.settings.screen_width, self.settings.screen_height)
+        )
         pygame.display.set_caption("Baluva")
         
         self.ninja = Ninja(self)
@@ -58,7 +58,7 @@ class Baluva:
             
     def _update_screen(self):
         """Update images on the screen, and flip to the new screen."""
-        # Redraw the screeen during each pass through the loop.
+        # Redraw the screen during each pass through the loop.
         self.screen.fill(self.settings.bg_color)
         self.ninja.blitme()
             
